@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
     },
   },
+  variants: {
+    extend: {},
+  },
   plugins: [],
 };
 

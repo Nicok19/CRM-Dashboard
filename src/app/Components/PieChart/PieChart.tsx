@@ -1,22 +1,14 @@
+import { FC, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  Title,
-  TooltipItem
-} from 'chart.js';
+import { Chart, ArcElement, ChartData, ChartOptions, Filler } from 'chart.js';
+import PieChartPopup from './PieChartPopup';
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  Title
-);
 
-const PieChart = () => {
-  const data = {
+// Registrar el elemento "arc" (ArcElement)
+Chart.register(ArcElement,Filler);
+
+const PieChart: FC = () => {
+  const [data, setData] = useState<ChartData<'pie', number[]>>({
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
@@ -41,9 +33,9 @@ const PieChart = () => {
         borderWidth: 1,
       },
     ],
-  };
+  });
 
-  const options = {
+  const options: ChartOptions<'pie'> = {
     responsive: true,
     plugins: {
       title: {
@@ -55,11 +47,11 @@ const PieChart = () => {
       },
       legend: {
         display: true,
-        position: 'top' as const,
+        position: 'top',
       },
       tooltip: {
         callbacks: {
-          label: function (tooltipItem: TooltipItem<'pie'>) {
+          label: function (tooltipItem) {
             return tooltipItem.label + ': ' + tooltipItem.raw + '%';
           },
         },
@@ -67,7 +59,31 @@ const PieChart = () => {
     },
   };
 
-  return <Pie data={data} options={options} />;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => setIsPopupOpen(true)}
+      >
+        Edit Data
+      </button>
+      <Pie data={data} options={options} />
+      {isPopupOpen && (
+        <PieChartPopup
+          data={data}
+          setData={setData}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default PieChart;
+
+
+
+
+

@@ -1,30 +1,13 @@
+import { FC, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartData,
-  ChartOptions,
-  TooltipItem
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartData, ChartOptions, TooltipItem } from 'chart.js';
+import BarChartPopup from './BarChartPopup';
 
-// Registra los componentes de Chart.js
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// Registrar los componentes de Chart.js
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart: React.FC = () => {
- 
-  const data: ChartData<'bar', number[]> = {
+const BarChart: FC = () => {
+  const [data, setData] = useState<ChartData<'bar', number[]>>({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
@@ -35,8 +18,7 @@ const BarChart: React.FC = () => {
         borderWidth: 1,
       },
     ],
-  };
-
+  });
 
   const options: ChartOptions<'bar'> = {
     responsive: true,
@@ -77,7 +59,26 @@ const BarChart: React.FC = () => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => setIsPopupOpen(true)}
+      >
+        Edit Data
+      </button>
+      <Bar data={data} options={options} />
+      {isPopupOpen && (
+        <BarChartPopup
+          data={data}
+          setData={setData}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default BarChart;

@@ -1,9 +1,6 @@
-import Image from "next/image";
-import 'tailwindcss/tailwind.css';
-import Button__addData from "../src/app/Components/Button__addData";
-import LineChart from "../src/app/Components/LineChart";
-import PieChart from "../src/app/Components/PieChart";
-import BarChart from "src/app/Components/BarChart";
+import LineChart from "../src/app/Components/LineChart/LineChart";
+import PieChart from "../src/app/Components/PieChart/PieChart";
+import BarChart from "../src/app/Components/BarChart/BarChart";
 
 export default function Home() {
   return (
@@ -17,39 +14,29 @@ export default function Home() {
       </div>
       {/* Header End*/}
 
-      {/* LineChart begin*/}
-      <div className="mt-24">
-        <Button__addData />
-        <div className="mt-24 xl:w-6/6 flex justify-center items-center">
-       <PieChart />
-       </div>
-
+      {/* PieChart begin*/}
+      <div className="mt-24 flex justify-center items-center ">
+        <PieChart />
       </div>
-      {/* LineChart end*/}
-
 
       {/* LineChart and BarChart begin*/}
       <div className="mt-24 flex justify-between">
         <div className="w-5/12">
-        <div className="mt-24 mb-24">
-        <Button__addData />
-        </div>
-          
+          <div className="mt-24 mb-24">
+          </div>
           <LineChart />
         </div>
 
         <div className="w-6/12">
-        <div className="mt-24 mb-24">
-        <Button__addData />
-        </div>
+          <div className="mt-24 mb-24">
+          </div>
           <BarChart />
         </div>
-
-
       </div>
       {/* LineChart and BarChart end*/}
 
     </div>
   );
 }
+
 

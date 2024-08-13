@@ -1,8 +1,6 @@
 import { FC, useState } from 'react';
 import { ChartData } from 'chart.js';
 
-
-
 interface PopupProps {
   onClose: () => void;
   data: ChartData<'pie', number[]>;
@@ -10,78 +8,116 @@ interface PopupProps {
 }
 
 const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
-  const [title, setTitle] = useState(data.datasets[0].label || '');
-  const [labels, setLabels] = useState(data.labels || []);
-  const [chartData, setChartData] = useState(data.datasets[0].data || []);
+  const [initialTitle] = useState(data.datasets[0].label || '');
+  const [initialLabels] = useState(data.labels || []);
+  const [initialData] = useState(data.datasets[0].data || []);
 
-  const handleSave = () => {
-    setData({
-      ...data,
-      labels,
-      datasets: [{ ...data.datasets[0], label: title, data: chartData }],
-    });
-    onClose();
+  const [title, setTitle] = useState('');
+  const [labels, setLabels] = useState<string[]>([]);
+  const [chartData, setChartData] = useState<number[]>([]);
+
+ 
+  const handleLabelsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Labels Input Value:', e.target.value); // Debugging line
+    const newLabels = e.target.value.split('/').map(label => label.trim()).filter(Boolean);
+    setLabels(newLabels);
   };
 
-  return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg mt-16 w-full">
-      
-      <div className="relative bg-slate-500 p-6 rounded shadow-lg w-full">
-        <h2 className="text-xl font-bold mb-24">Edit Chart Data</h2>
+  const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Data Input Value:', e.target.value); // Debugging line
+    const newData = e.target.value.split('/').map(value => Number(value.trim())).filter(value => !isNaN(value) && value >= 1);
+    setChartData(newData);
+  };
 
-        
-        <label className="block mb-2">
+  const handleSave = () => {
+    if (isFormValid) {
+      setData({
+        ...data,
+        labels,
+        datasets: [{ ...data.datasets[0], label: title, data: chartData }],
+      });
+      onClose();
+    }
+  };
+
+  
+  const hasValidData = chartData.every((value) => value >= 1);
+  const isLabelDataCountMatch = labels.length === chartData.length;
+  const isFormValid = labels.length > 0 && chartData.length > 0 && hasValidData && isLabelDataCountMatch;
+
+  return (
+    <div className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg w-full h-full">
+      <div className="relative bg-slate-800 p-6 rounded shadow-lg w-2/3">
+        <h2 className="text-2xl font-bold mb-8 text-white">Edit Chart Data</h2>
+        <p className='mb-10 text-xl text-white font-medium'>Enter the data and labels separated by slashes (/).</p>
+
+        <label className="block mb-2 text-white">
           Title:
           <input
             type="text"
-            value={title}
+            value={title || ''}
             onChange={(e) => setTitle(e.target.value)}
-            className="border rounded p-2 "
+            placeholder="Enter title"
+            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
           />
         </label>
-        
-         <div>
-        <label className="block mb-2">
+
+        <label className="block mb-2 text-white">
           Labels:
           <input
             type="text"
-            value={labels.join(',')}
-            onChange={(e) => setLabels(e.target.value.split(',').filter(Boolean))}
-            className="border rounded p-2  "
+            value={labels.length > 0 ? labels.join(' / ') : ''}
+            onChange={handleLabelsChange}
+            placeholder="Enter labels separated by /"
+            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
           />
         </label>
-        </div>
-        <label className="block mb-2">
+
+        <label className="block mb-2 text-white">
           Data:
           <input
             type="text"
-            value={chartData.join(',')}
-            onChange={(e) => setChartData(e.target.value.split(',').map(Number))}
-            className="border rounded p-2 w-full"
+            value={chartData.length > 0 ? chartData.join(' / ') : ''}
+            onChange={handleDataChange}
+            placeholder="Enter data separated by /"
+            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
           />
         </label>
-        <div className="mt-4 flex flex-col justify-end space-y-2">
-          <button 
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={handleSave} 
+
+        <p className="text-red-500 text-center mb-4">
+          {!isFormValid && (
+            labels.length === 0 || chartData.length === 0 ? (
+              "At least one label and one data point are required."
+            ) : !isLabelDataCountMatch ? (
+              "The number of labels must match the number of data points."
+            ) : (
+              "All data points must be greater than or equal to 1."
+            )
+          )}
+        </p>
+
+        <div className="mt-12 flex flex-row justify-center space-x-5">
+          <button
+            className={`bg-blue-500 text-white font-bold py-2 px-4 rounded w-2/6 h-10 ${!isFormValid ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+            onClick={handleSave}
+            disabled={!isFormValid}
           >
             Save
           </button>
           <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-2/6 h-10"
             onClick={onClose}
           >
             Close
           </button>
         </div>
       </div>
-      
     </div>
   );
 };
 
-export default PieChartPopup;
 
+export default PieChartPopup;
 
 
 

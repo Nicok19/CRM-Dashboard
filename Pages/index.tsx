@@ -1,6 +1,6 @@
-import LineChart from "../src/app/Components/LineChart/LineChart";
-import PieChart from "../src/app/Components/PieChart/PieChart";
-import BarChart from "../src/app/Components/BarChart/BarChart";
+import LineChart from "../src/app/components/LineChart/LineChart";
+import PieChart from "../src/app/components/PieChart/PieChart";
+import BarChart from "../src/app/components/BarChart/BarChart";
 
 export default function Home() {
   return (

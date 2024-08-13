@@ -1,11 +1,9 @@
 import { FC, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Chart, ArcElement, ChartData, ChartOptions, Filler } from 'chart.js';
+import { Chart, ArcElement, ChartData, ChartOptions, TooltipItem, Filler } from 'chart.js';
 import PieChartPopup from './PieChartPopup';
 
-
-// Registrar el elemento "arc" (ArcElement)
-Chart.register(ArcElement,Filler);
+Chart.register(ArcElement, Filler);
 
 const PieChart: FC = () => {
   const [data, setData] = useState<ChartData<'pie', number[]>>({
@@ -51,8 +49,8 @@ const PieChart: FC = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (tooltipItem) {
-            return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+          label: function (tooltipItem: TooltipItem<'pie'>) {
+            return `${tooltipItem.label}: ${tooltipItem.raw}%`;
           },
         },
       },
@@ -82,6 +80,8 @@ const PieChart: FC = () => {
 };
 
 export default PieChart;
+
+
 
 
 

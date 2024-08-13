@@ -8,23 +8,16 @@ interface PopupProps {
 }
 
 const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
-  const [initialTitle] = useState(data.datasets[0].label || '');
-  const [initialLabels] = useState(data.labels || []);
-  const [initialData] = useState(data.datasets[0].data || []);
+  const [title, setTitle] = useState(data.datasets[0].label || '');
+  const [labels, setLabels] = useState(data.labels || []);
+  const [chartData, setChartData] = useState(data.datasets[0].data || []);
 
-  const [title, setTitle] = useState('');
-  const [labels, setLabels] = useState<string[]>([]);
-  const [chartData, setChartData] = useState<number[]>([]);
-
- 
   const handleLabelsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Labels Input Value:', e.target.value); // Debugging line
     const newLabels = e.target.value.split('/').map(label => label.trim()).filter(Boolean);
     setLabels(newLabels);
   };
 
   const handleDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Data Input Value:', e.target.value); // Debugging line
     const newData = e.target.value.split('/').map(value => Number(value.trim())).filter(value => !isNaN(value) && value >= 1);
     setChartData(newData);
   };
@@ -40,7 +33,6 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
     }
   };
 
-  
   const hasValidData = chartData.every((value) => value >= 1);
   const isLabelDataCountMatch = labels.length === chartData.length;
   const isFormValid = labels.length > 0 && chartData.length > 0 && hasValidData && isLabelDataCountMatch;
@@ -55,7 +47,7 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
           Title:
           <input
             type="text"
-            value={title || ''}
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title"
             className="border rounded text-slate-800 p-2 ml-5 w-5/6"
@@ -115,7 +107,6 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
     </div>
   );
 };
-
 
 export default PieChartPopup;
 

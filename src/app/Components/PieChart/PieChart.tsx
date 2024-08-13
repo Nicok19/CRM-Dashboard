@@ -1,78 +1,132 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect, useMemo } from 'react';
+import { ChartData, ChartOptions, ArcElement } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { Chart, ArcElement, ChartData, ChartOptions, TooltipItem, Filler } from 'chart.js';
 import PieChartPopup from './PieChartPopup';
+import { Chart } from 'chart.js';
 
-Chart.register(ArcElement, Filler);
+// Register ArcElement for Pie charts
+Chart.register(ArcElement);
 
 const PieChart: FC = () => {
   const [data, setData] = useState<ChartData<'pie', number[]>>({
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
-        label: 'Pie Chart Example',
+        label: 'Pie Chart Example', // Initial title
         data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
+        backgroundColor: [], // Initially empty
+        borderColor: [],     // Initially empty
         borderWidth: 1,
       },
     ],
   });
 
+  // State to detect dark mode
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsDarkMode(event.matches);
+    };
+
+    setIsDarkMode(darkModeMediaQuery.matches);
+    darkModeMediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  // Memoize colors based on the mode
+  const backgroundColors = useMemo(() => 
+    isDarkMode
+      ? [
+          'rgba(0, 204, 255, 0.8)', // Dark mode colors
+          'rgba(255, 105, 180, 0.8)',
+          'rgba(255, 69, 0, 0.8)',
+          'rgba(50, 205, 50, 0.8)',
+          'rgba(255, 215, 0, 0.8)',
+          'rgba(255, 140, 0, 0.8)',
+        ]
+      : [
+          'rgba(0, 123, 255, 0.8)', // Light mode colors
+          'rgba(255, 193, 7, 0.8)',
+          'rgba(40, 167, 69, 0.8)',
+          'rgba(23, 162, 184, 0.8)',
+          'rgba(108, 117, 125, 0.8)',
+          'rgba(255, 87, 34, 0.8)',
+        ],
+  [isDarkMode]);
+
+  const borderColors = useMemo(() => 
+    isDarkMode
+      ? [
+          'rgba(0, 204, 55, 1)', // Dark mode border colors
+          'rgba(255, 105, 180, 1)',
+          'rgba(255, 69, 0, 1)',
+          'rgba(50, 205, 50, 1)',
+          'rgba(255, 215, 0, 1)',
+          'rgba(255, 140, 0, 1)',
+        ]
+      : [
+          'rgba(0, 123, 255, 1)', // Light mode border colors
+          'rgba(255, 193, 7, 1)',
+          'rgba(40, 167, 69, 1)',
+          'rgba(23, 162, 184, 1)',
+          'rgba(108, 117, 125, 1)',
+          'rgba(255, 87, 34, 1)',
+        ],
+  [isDarkMode]);
+
   const options: ChartOptions<'pie'> = {
     responsive: true,
     plugins: {
-      title: {
-        display: true,
-        text: 'Pie Chart Example',
-        font: {
-          size: 20,
-        },
-      },
       legend: {
-        display: true,
         position: 'top',
       },
       tooltip: {
         callbacks: {
-          label: function (tooltipItem: TooltipItem<'pie'>) {
-            return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+          label: (context) => {
+            return `${context.label}: ${context.raw}`;
           },
         },
       },
     },
+    layout: {
+      padding: 20, // Adjust padding to control chart size
+    },
   };
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  useEffect(() => {
+    setData(prevData => ({
+      ...prevData,
+      datasets: [
+        {
+          ...prevData.datasets[0],
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
+        },
+      ],
+    }));
+  }, [backgroundColors, borderColors]);
 
   return (
-    <div className="relative">
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => setIsPopupOpen(true)}
+    <div style={{ width: '600px', height: '600px' }}>
+      <h2 className="text-center text-xl mb-4">{data.datasets[0].label}</h2> {/* Display chart title */}
+      <Pie data={data} options={options} />
+      <button 
+        className="bg-blue-500 hover:bg-blue-700  dark:bg-white dark:text-gray-800 text-white font-bold py-2 px-4 rounded" 
+        onClick={() => setShowPopup(true)}
       >
         Edit Data
       </button>
-      <Pie data={data} options={options} />
-      {isPopupOpen && (
-        <PieChartPopup
-          data={data}
-          setData={setData}
-          onClose={() => setIsPopupOpen(false)}
+      {showPopup && (
+        <PieChartPopup 
+          onClose={() => setShowPopup(false)} 
+          data={data} 
+          setData={setData} 
         />
       )}
     </div>
@@ -80,10 +134,3 @@ const PieChart: FC = () => {
 };
 
 export default PieChart;
-
-
-
-
-
-
-

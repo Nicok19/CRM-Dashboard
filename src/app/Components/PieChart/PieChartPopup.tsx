@@ -38,45 +38,53 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
   const isFormValid = labels.length > 0 && chartData.length > 0 && hasValidData && isLabelDataCountMatch;
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg w-full h-full">
-      <div className="relative bg-slate-800 p-6 rounded shadow-lg w-2/3">
-        <h2 className="text-2xl font-bold mb-8 text-white">Edit Chart Data</h2>
-        <p className='mb-10 text-xl text-white font-medium'>Enter the data and labels separated by slashes (/).</p>
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg w-full h-full p-4">
+      <div className="relative bg-slate-800 p-6 rounded shadow-lg
+        w-full max-w-xs /* Small screens */
+        sm:max-w-sm /* Small screens (sm) */
+        md:max-w-md /* Medium screens (md) */
+        lg:max-w-lg /* Large screens (lg) */
+        xl:max-w-xl /* Extra large screens (xl) */
+        2xl:max-w-2xl /* 2XL screens (2xl) */
+        mx-auto"
+      >
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-white">Edit Chart Data</h2>
+        <p className='mb-8 text-lg sm:text-xl text-white font-medium'>Enter the data and labels separated by slashes (/).</p>
 
-        <label className="block mb-2 text-white">
+        <label className="block mb-2 text-white text-sm sm:text-base">
           Title:
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title"
-            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
+            className="border rounded text-slate-800 p-2 mt-1 w-full"
           />
         </label>
 
-        <label className="block mb-2 text-white">
+        <label className="block mb-2 text-white text-sm sm:text-base">
           Labels:
           <input
             type="text"
             value={labels.length > 0 ? labels.join(' / ') : ''}
             onChange={handleLabelsChange}
             placeholder="Enter labels separated by /"
-            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
+            className="border rounded text-slate-800 p-2 mt-1 w-full"
           />
         </label>
 
-        <label className="block mb-2 text-white">
+        <label className="block mb-2 text-white text-sm sm:text-base">
           Data:
           <input
             type="text"
             value={chartData.length > 0 ? chartData.join(' / ') : ''}
             onChange={handleDataChange}
             placeholder="Enter data separated by /"
-            className="border rounded text-slate-800 p-2 ml-5 w-5/6"
+            className="border rounded text-slate-800 p-2 mt-1 w-full"
           />
         </label>
 
-        <p className="text-red-500 text-center mb-4">
+        <p className="text-red-500 text-center mb-4 text-sm sm:text-base">
           {!isFormValid && (
             labels.length === 0 || chartData.length === 0 ? (
               "At least one label and one data point are required."
@@ -88,16 +96,16 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
           )}
         </p>
 
-        <div className="mt-12 flex flex-row justify-center space-x-5">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
-            className={`bg-blue-500 text-white font-bold py-2 px-4 rounded w-2/6 h-10 ${!isFormValid ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+            className={`bg-blue-500 text-white font-bold py-2 px-4 rounded w-full sm:w-1/2 h-10 ${!isFormValid ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
             onClick={handleSave}
             disabled={!isFormValid}
           >
             Save
           </button>
           <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-2/6 h-10"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full sm:w-1/2 h-10"
             onClick={onClose}
           >
             Close
@@ -109,6 +117,7 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
 };
 
 export default PieChartPopup;
+
 
 
 

@@ -23,15 +23,15 @@ const BarChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gray-900 bg-opacity-80 shadow-2xl rounded-lg mt-16 w-full">
-      <div className="relative bg-slate-500 p-6 rounded shadow-lg w-full">
-        <h2 className="text-xl font-bold mb-24">Edit Chart Data</h2>
-        <label className="block mb-2">
+      <div className=" bg-slate-500 p-6 rounded shadow-lg w-96">
+        <h2 className="text-xl font-bold mb-24 text-white">Edit Chart Data</h2>
+        <label className="block mb-2">-
           Title:
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border rounded p-2"
+            className="border rounded p-2 font-bold font-primary"
           />
         </label>
         <div>

@@ -1,30 +1,30 @@
-import { FC, useState, useEffect, useMemo } from 'react';
-import { ChartData, ChartOptions, ArcElement } from 'chart.js';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Pie } from 'react-chartjs-2';
+import { ChartData, ChartOptions, ArcElement, Title, Legend } from 'chart.js';
 import PieChartPopup from './PieChartPopup';
 import { Chart } from 'chart.js';
 
-// Register ArcElement for Pie charts
-Chart.register(ArcElement);
+// Register necessary elements
+Chart.register(ArcElement, Title, Legend);
 
-const PieChart: FC = () => {
+const PieChart: React.FC = () => {
   const [data, setData] = useState<ChartData<'pie', number[]>>({
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
-        label: 'Pie Chart Example', // Initial title
+        label: 'Pie Chart Example',
         data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [], // Initially empty
-        borderColor: [],     // Initially empty
+        backgroundColor: [], // To be set based on mode
+        borderColor: [],     // To be set based on mode
         borderWidth: 1,
       },
     ],
   });
 
-  // State to detect dark mode
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Detect dark mode changes
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (event: MediaQueryListEvent) => {
@@ -39,66 +39,52 @@ const PieChart: FC = () => {
     };
   }, []);
 
-  // Memoize colors based on the mode
-  const backgroundColors = useMemo(() => 
+  // Define colors based on mode
+  const backgroundColors = useMemo(() =>
     isDarkMode
       ? [
-          'rgba(0, 204, 255, 0.8)', // Dark mode colors
-          'rgba(255, 105, 180, 0.8)',
-          'rgba(255, 69, 0, 0.8)',
-          'rgba(50, 205, 50, 0.8)',
-          'rgba(255, 215, 0, 0.8)',
-          'rgba(255, 140, 0, 0.8)',
+          'rgba(68, 221, 176, 1)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
         ]
       : [
-          'rgba(0, 123, 255, 0.8)', // Light mode colors
-          'rgba(255, 193, 7, 0.8)',
-          'rgba(40, 167, 69, 0.8)',
-          'rgba(23, 162, 184, 0.8)',
-          'rgba(108, 117, 125, 0.8)',
-          'rgba(255, 87, 34, 0.8)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
         ],
   [isDarkMode]);
 
-  const borderColors = useMemo(() => 
+  const borderColors = useMemo(() =>
     isDarkMode
       ? [
-          'rgba(0, 204, 55, 1)', // Dark mode border colors
-          'rgba(255, 105, 180, 1)',
-          'rgba(255, 69, 0, 1)',
-          'rgba(50, 205, 50, 1)',
-          'rgba(255, 215, 0, 1)',
-          'rgba(255, 140, 0, 1)',
+          'rgba(68, 221, 176, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
         ]
       : [
-          'rgba(0, 123, 255, 1)', // Light mode border colors
-          'rgba(255, 193, 7, 1)',
-          'rgba(40, 167, 69, 1)',
-          'rgba(23, 162, 184, 1)',
-          'rgba(108, 117, 125, 1)',
-          'rgba(255, 87, 34, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
         ],
   [isDarkMode]);
 
-  const options: ChartOptions<'pie'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => {
-            return `${context.label}: ${context.raw}`;
-          },
-        },
-      },
-    },
-    layout: {
-      padding: 20, // Adjust padding to control chart size
-    },
-  };
+  // Define title and label color based on mode
+  const titleColor = useMemo(() => (isDarkMode ? '#ffffff' : '#000000'), [isDarkMode]);
+  const labelColor = useMemo(() => (isDarkMode ? '#ffffff' : '#000000'), [isDarkMode]);
 
+  // Update data colors based on mode
   useEffect(() => {
     setData(prevData => ({
       ...prevData,
@@ -112,16 +98,40 @@ const PieChart: FC = () => {
     }));
   }, [backgroundColors, borderColors]);
 
+  // Define chart options
+  const options: ChartOptions<'pie'> = {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Pie Chart Example',
+        font: {
+          size: 20, // Match the LineChart font size
+          family: 'Arial',
+          weight: 'bold', // Match the LineChart font weight
+        },
+        color: titleColor, // Set title color based on mode
+        padding: {
+          top: 10,
+          bottom: 20,
+        },
+      },
+      legend: {
+        labels: {
+          color: labelColor, // Set label color here
+        },
+      },
+    },
+  };
+
   return (
-    <div style={{ width: '600px', height: '600px' }}>
-      <h2 className="text-center text-xl mb-4">{data.datasets[0].label}</h2> {/* Display chart title */}
-      <Pie data={data} options={options} />
-      <button 
-        className="bg-blue-500 hover:bg-blue-700  dark:bg-white dark:text-gray-800 text-white font-bold py-2 px-4 rounded" 
+    <div>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 dark:bg-white dark:text-gray-800 text-white font-bold py-2 px-4 rounded mb-10"
         onClick={() => setShowPopup(true)}
       >
         Edit Data
       </button>
+      <Pie data={data} options={options} />
       {showPopup && (
         <PieChartPopup 
           onClose={() => setShowPopup(false)} 
@@ -134,3 +144,4 @@ const PieChart: FC = () => {
 };
 
 export default PieChart;
+

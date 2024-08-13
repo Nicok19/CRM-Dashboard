@@ -16,17 +16,18 @@ export default function Home() {
 
   return (
     // General Container
-    <div className="bg-white dark:bg-gray-800">
-      <div className="xl:w-5/6 m-auto">
+    <div className="bg-white dark:bg-gray-800 pb-10">
+      <div className="w-full sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-5/6 2xl:w-4/5 m-auto">
         
         {/* Header Begin*/}
-        <div className="flex justify-between items-center pt-4 mb-5">
-          <h1 className="font-bold text-3xl text-cyan-400 dark:text-white">CRM Dashboard</h1>
-          <p className="text-cyan-400 font-medium dark:text-white">A Creation of Nicolás Bertinat</p>
+        <div className="flex flex-col md:flex-row justify-between items-center pt-4 mb-5 m-auto md:w-2/3 lg:w-5/6 2xl:w-10/12">
+        <h1 className="font-bold text-3xl text-blue-500 dark:text-white mb-3 mt-10 md:mt-0 md:text-xl  xl:text-2xl 2xl:text-4xl  ">CRM Dashboard</h1>
+<p className="text-black font-medium md:text-base dark:text-white mb-3 2xl:text-2xl">A Creation of Nicolás Bertinat</p>
+
           {/* Dark Mode Toggle Button */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="ml-4 px-4 py-2 bg-cyan-400 text-slate-900 dark:bg-teal-400 dark:text-slate-800 rounded"
+            className="w-2/3 md:w-32 2xl:w-52 ml-4 px-4 py-2 bg-blue-500 text-white dark:bg-teal-400 dark:text-slate-800 rounded"
           >
             {darkMode ? 'Light Mode' : 'Dark Mode'}
           </button>
@@ -34,29 +35,29 @@ export default function Home() {
         {/* Header End*/}
 
         {/* PieChart begin*/}
-        <div className="mt-24 flex justify-center items-center w-full">
-          <PieChart />
-        </div>
+        <div className="mt-10 sm:mt-16 md:mt-24 lg:mt-32 xl:mt-40 flex justify-center items-center w-full">
+  <div className="w-10/12 sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-2/4">
+    <PieChart />
+  </div>
+</div>
 
-        {/* LineChart and BarChart begin*/}
-        <div className="mt-24 flex justify-between">
-          <div className="w-5/12">
-            <div className="mt-24 mb-24">
-            </div>
-            <LineChart />
-          </div>
+{/* LineChart and BarChart begin */}
+<div className="mt-10 sm:mt-16 md:mt-24 lg:mt-32 xl:mt-40 flex flex-col lg:flex-row justify-between w-full m-auto">
+  {/* LineChart container */}
+  <div className="mb-6 md:mb-0 flex m-auto">
+    <LineChart />
+  </div>
 
-          <div className="w-6/12">
-            <div className="mt-24 mb-24">
-            </div>
-            <BarChart />
-          </div>
-        </div>
-        {/* LineChart and BarChart end*/}
+  {/* BarChart container */}
+  <div className=" flex m-auto">
+    <BarChart />
+  </div>
+</div>
+{/* LineChart and BarChart end */}
+
+
 
       </div>
     </div>
   );
 }
-
-

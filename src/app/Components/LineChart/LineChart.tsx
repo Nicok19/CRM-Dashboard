@@ -15,10 +15,10 @@ import {
 } from 'chart.js';
 import LineChartPopup from './LineChartPopup';
 
-// Registrar los componentes de Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const LineChart: FC = () => {
+  const [title, setTitle] = useState('Monthly Revenue Data');
   const [data, setData] = useState<ChartData<'line', number[]>>({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -34,11 +34,11 @@ const LineChart: FC = () => {
 
   const options: ChartOptions<'line'> = {
     responsive: true,
-    maintainAspectRatio: false, // Permitir ajustar el tamaño del gráfico
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
-        text: 'Monthly Revenue Data',
+        text: title,
         font: {
           size: 20,
         },
@@ -83,15 +83,14 @@ const LineChart: FC = () => {
         Edit Data
       </button>
 
-      {/* Ajustar el tamaño del gráfico según los breakpoints de Tailwind */}
       <div
         className="
-          w-[350px] h-[200px]          /* Default size */
-          sm:w-[600px] sm:h-[300px]     /* Small screens */
-          md:w-[800px] md:h-[350px]     /* Medium screens */
-          lg:w-[500px] lg:h-[300px]     /* Large screens */
-          xl:w-[600px] xl:h-[350px]     /* Extra large screens */
-          2xl:w-[800px] 2xl:h-[500px]   /* 2XL screens */
+          w-[350px] h-[200px]        
+          sm:w-[600px] sm:h-[300px]     
+          md:w-[800px] md:h-[350px]     
+          lg:w-[500px] lg:h-[300px]    
+          xl:w-[600px] xl:h-[350px]    
+          2xl:w-[800px] 2xl:h-[500px]  
         "
       >
         <Line data={data} options={options} />
@@ -102,6 +101,8 @@ const LineChart: FC = () => {
           data={data}
           setData={setData}
           onClose={() => setIsPopupOpen(false)}
+          title={title}
+          setTitle={setTitle}
         />
       )}
     </div>

@@ -103,7 +103,7 @@ const PieChart: React.FC = () => {
     plugins: {
       title: {
         display: true,
-        text: 'Pie Chart Example',
+        text: data.datasets[0].label, // Use the label from dataset for the title
         font: {
           size: 20, // Match the LineChart font size
           family: 'Arial',
@@ -144,4 +144,5 @@ const PieChart: React.FC = () => {
 };
 
 export default PieChart;
+
 

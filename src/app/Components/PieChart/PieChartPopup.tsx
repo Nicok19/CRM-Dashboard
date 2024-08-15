@@ -58,7 +58,7 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-80">
-      <div className="relative bg-slate-800 p-6 rounded shadow-lg
+      <div className="relative bg-white dark:bg-slate-800 p-6 rounded shadow-lg
         w-full max-w-xs /* Small screens */
         sm:max-w-sm /* Small screens (sm) */
         md:max-w-md /* Medium screens (md) */
@@ -67,10 +67,10 @@ const PieChartPopup: FC<PopupProps> = ({ onClose, data, setData }) => {
         2xl:max-w-2xl /* 2XL screens (2xl) */
         max-h-[90vh] overflow-auto mx-auto"
       >
-        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-white">Edit Chart Data</h2>
-        <p className='mb-8 text-lg sm:text-xl text-white font-medium'>Enter the label and data pairs.</p>
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-slate-800 dark:text-white">Edit Chart Data</h2>
+        <p className='mb-8 text-lg sm:text-xl text-slate-800 font-medium dark:text-white'>Enter the label and data pairs.</p>
 
-        <label className="block mb-2 text-white text-sm sm:text-base">
+        <label className="block mb-2 text-slate-800 dark:text-white text-sm sm:text-base">
           Title:
           <input
             type="text"

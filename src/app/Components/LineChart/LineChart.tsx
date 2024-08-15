@@ -17,16 +17,20 @@ import LineChartPopup from './LineChartPopup';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const LineChart: FC = () => {
-  const [title, setTitle] = useState('Monthly Revenue Data');
+interface LineChartProps {
+  darkMode: boolean;
+}
+
+const LineChart: FC<LineChartProps> = ({ darkMode }) => {
+  const [title, setTitle] = useState('Line Chart Data');
   const [data, setData] = useState<ChartData<'line', number[]>>({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Data 1', 'Data 2', 'Data3', 'Data 4', 'Data 5'],
     datasets: [
       {
-        label: 'Monthly Revenue',
+        label: 'Title',
         data: [30, 45, 60, 50, 70, 90, 100],
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: darkMode ? 'rgba(153, 102, 255, 1)' : 'rgba(75, 192, 192, 1)',
+        backgroundColor: darkMode ? 'rgba(153, 102, 255, 0.2)' : 'rgba(75, 192, 192, 0.2)',
         borderWidth: 2,
       },
     ],
@@ -42,10 +46,14 @@ const LineChart: FC = () => {
         font: {
           size: 20,
         },
+        color: darkMode ? 'white' : 'black', 
       },
       legend: {
         display: true,
         position: 'top',
+        labels: {
+          color: darkMode ? 'white' : 'black', 
+        },
       },
       tooltip: {
         callbacks: {
@@ -53,19 +61,35 @@ const LineChart: FC = () => {
             return tooltipItem.label + ': ' + tooltipItem.raw;
           },
         },
+        titleColor: darkMode ? 'white' : 'black', 
+        bodyColor: darkMode ? 'white' : 'black', 
       },
     },
     scales: {
       x: {
         title: {
           display: true,
-          text: 'Months',
+          text: 'Labels',
+          color: darkMode ? 'white' : 'black', 
+        },
+        ticks: {
+          color: darkMode ? 'white' : 'black', 
+        },
+        grid: {
+          color: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         },
       },
       y: {
         title: {
           display: true,
-          text: 'Revenue',
+          text: 'Data',
+          color: darkMode ? 'white' : 'black', 
+        },
+        ticks: {
+          color: darkMode ? 'white' : 'black', 
+        },
+        grid: {
+          color: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         },
         beginAtZero: true,
       },
@@ -77,7 +101,7 @@ const LineChart: FC = () => {
   return (
     <div className="relative">
       <button
-        className="bg-blue-500 hover:bg-blue-700 dark:bg-white dark:text-gray-800 text-white font-bold py-2 px-4 rounded mb-10 mt-20"
+        className="bg-blue-500 hover:bg-blue-700 dark:bg-white dark:text-gray-800 dark:hover:bg-teal-400 dark:hover:text-white text-white font-bold py-2 px-4 rounded mb-10 mt-20 transition-colors duration-300"
         onClick={() => setIsPopupOpen(true)}
       >
         Edit Data
@@ -110,5 +134,6 @@ const LineChart: FC = () => {
 };
 
 export default LineChart;
+
 
 

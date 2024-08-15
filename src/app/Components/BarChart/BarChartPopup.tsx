@@ -52,12 +52,12 @@ const BarChartPopup: FC<BarChartPopupProps> = ({ onClose, data, setData, title, 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-80">
-      <div className="relative bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[90vh] overflow-auto">
-        <h2 className="text-2xl font-bold mb-6 text-white">Edit Bar Chart Data</h2>
+      <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[90vh] overflow-auto">
+        <h2 className="text-2xl font-bold mb-6 text-slate-800 dark:text-white">Edit Bar Chart Data</h2>
         
-        <p className="mb-8 text-lg sm:text-xl text-white font-medium">Enter the label and data pairs.</p>
+        <p className="mb-8 text-lg sm:text-xl text-slate-800 dark:text-white font-medium">Enter the label and data pairs.</p>
         
-        <label className="block mb-4 text-white">
+        <label className="block mb-4 text-slate-800 dark:text-white">
           Title:
           <input
             type="text"
@@ -70,7 +70,7 @@ const BarChartPopup: FC<BarChartPopupProps> = ({ onClose, data, setData, title, 
         {inputs.map((input, index) => (
           <div key={index} className="mb-4 flex">
             <label className="block mb-1 text-gray-800">
-              Label:
+        
               <input
                 type="text"
                 value={input.label}
@@ -79,7 +79,7 @@ const BarChartPopup: FC<BarChartPopupProps> = ({ onClose, data, setData, title, 
               />
             </label>
             <label className="block mb-1 text-gray-800">
-              Data:
+           
               <input
                 type="number"
                 value={input.value}

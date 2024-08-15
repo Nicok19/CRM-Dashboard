@@ -52,11 +52,12 @@ const LineChartPopup: FC<LineChartPopupProps> = ({ onClose, data, setData, title
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-80">
-      <div className="relative  bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg">
+      <div className="relative bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[90vh] overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-white">Edit Line Chart Data</h2>
 
         <p className='mb-8 text-lg sm:text-xl text-white font-medium'>Enter the label and data pairs.</p>
-        <label className="block mb-4 text-white ">
+        
+        <label className="block mb-4 text-white">
           Title:
           <input
             type="text"
@@ -65,10 +66,10 @@ const LineChartPopup: FC<LineChartPopupProps> = ({ onClose, data, setData, title
             className="border rounded p-2 w-full text-gray-800"
           />
         </label>
+
         {inputs.map((input, index) => (
           <div key={index} className="mb-4 flex">
             <label className="block mb-1 text-gray-800">
-             
               <input
                 type="text"
                 value={input.label}
@@ -77,7 +78,6 @@ const LineChartPopup: FC<LineChartPopupProps> = ({ onClose, data, setData, title
               />
             </label>
             <label className="block mb-1 text-gray-800">
-             
               <input
                 type="number"
                 value={input.value}
@@ -95,6 +95,7 @@ const LineChartPopup: FC<LineChartPopupProps> = ({ onClose, data, setData, title
             )}
           </div>
         ))}
+
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full sm:w-1/2 mb-4"
           onClick={handleAddInput}
@@ -102,16 +103,15 @@ const LineChartPopup: FC<LineChartPopupProps> = ({ onClose, data, setData, title
           Add Label/Data Pair
         </button>
 
-
         <div className="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
-            className= "bg-blue-500 text-white font-bold py-2 px-4 rounded w-5/12 sm:w-1/2 h-10"
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded sm:w-1/2 h-10"
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-5/12 sm:w-1/2 h-10"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded sm:w-1/2 h-10"
             onClick={onClose}
           >
             Close

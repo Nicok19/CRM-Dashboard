@@ -14,10 +14,10 @@ import {
 } from 'chart.js';
 import BarChartPopup from './BarChartPopup';
 
-// Registrar los componentes de Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarChart: FC = () => {
+  const [title, setTitle] = useState('Monthly Sales Data');
   const [data, setData] = useState<ChartData<'bar', number[]>>({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -33,11 +33,11 @@ const BarChart: FC = () => {
 
   const options: ChartOptions<'bar'> = {
     responsive: true,
-    maintainAspectRatio: false, // Permitir ajustar el tamaño del gráfico
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
-        text: 'Monthly Sales Data',
+        text: title,
         font: {
           size: 20,
         },
@@ -82,15 +82,14 @@ const BarChart: FC = () => {
         Edit Data
       </button>
 
-      {/* Aumentar el tamaño del gráfico según los breakpoints de Tailwind */}
       <div
         className="
-          w-[350px] h-[200px]          /* Default size */
-          sm:w-[600px] sm:h-[300px]     /* Small screens */
-          md:w-[800px] md:h-[350px]     /* Medium screens */
-          lg:w-[500px] lg:h-[300px]     /* Large screens */
-          xl:w-600px] xl:h-[350px]     /* Extra large screens */
-          2xl:w-[800px] 2xl:h-[500px]   /* 2XL screens */
+          w-[350px] h-[200px]        
+          sm:w-[600px] sm:h-[300px]     
+          md:w-[800px] md:h-[350px]     
+          lg:w-[500px] lg:h-[300px]    
+          xl:w-[600px] xl:h-[350px]    
+          2xl:w-[800px] 2xl:h-[500px]  
         "
       >
         <Bar data={data} options={options} />
@@ -101,6 +100,8 @@ const BarChart: FC = () => {
           data={data}
           setData={setData}
           onClose={() => setIsPopupOpen(false)}
+          title={title}
+          setTitle={setTitle}
         />
       )}
     </div>
@@ -108,5 +109,6 @@ const BarChart: FC = () => {
 };
 
 export default BarChart;
+
 
 

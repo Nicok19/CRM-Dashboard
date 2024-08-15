@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -16,28 +16,33 @@ import BarChartPopup from './BarChartPopup';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart: FC = () => {
-  const [title, setTitle] = useState('Monthly Sales Data');
+interface BarChartProps {
+  darkMode: boolean;
+}
+
+const BarChart: FC<BarChartProps> = ({ darkMode }) => {
+  const [title, setTitle] = useState('Bar Chart Data');
   const [data, setData] = useState<ChartData<'bar', number[]>>({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 4', 'Label 5'],
     datasets: [
       {
-        label: 'Monthly Sales',
-        data: [12, 19, 3, 5, 2, 3, 7],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        label: 'Title',
+        data: [50, 60, 70, 80, 90, 100, 110],
+        backgroundColor: darkMode ? 'rgba(75, 192, 192, 0.2)' : 'rgba(255, 99, 132, 0.2)',
+        borderColor: darkMode ? 'rgba(75, 192, 192, 1)' : 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
       },
     ],
   });
 
-  const options: ChartOptions<'bar'> = {
+  const options: ChartOptions<'bar'> = useMemo(() => ({
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
         text: title,
+        color: darkMode ? 'white' : 'black',
         font: {
           size: 20,
         },
@@ -45,6 +50,9 @@ const BarChart: FC = () => {
       legend: {
         display: true,
         position: 'top',
+        labels: {
+          color: darkMode ? 'white' : 'black',
+        },
       },
       tooltip: {
         callbacks: {
@@ -52,31 +60,47 @@ const BarChart: FC = () => {
             return tooltipItem.label + ': ' + tooltipItem.raw;
           },
         },
+        bodyColor: darkMode ? 'white' : 'black',
+        titleColor: darkMode ? 'white' : 'black',
       },
     },
     scales: {
       x: {
         title: {
           display: true,
-          text: 'Months',
+          text: 'Labels',
+          color: darkMode ? 'white' : 'black',
+        },
+        ticks: {
+          color: darkMode ? 'white' : 'black',
+        },
+        grid: {
+          color: darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
         },
       },
       y: {
         title: {
           display: true,
-          text: 'Sales',
+          text: 'Data',
+          color: darkMode ? 'white' : 'black',
+        },
+        ticks: {
+          color: darkMode ? 'white' : 'black',
+        },
+        grid: {
+          color: darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
         },
         beginAtZero: true,
       },
     },
-  };
+  }), [darkMode, title]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
     <div className="relative">
       <button
-        className="bg-blue-500 hover:bg-blue-700 dark:bg-white dark:text-gray-800 text-white font-bold py-2 px-4 rounded mb-10 mt-20"
+       className="bg-blue-500 hover:bg-blue-700 dark:bg-white dark:text-gray-800 dark:hover:bg-teal-400 dark:hover:text-white text-white font-bold py-2 px-4 rounded mb-10 mt-20 transition-colors duration-300"
         onClick={() => setIsPopupOpen(true)}
       >
         Edit Data
@@ -109,6 +133,8 @@ const BarChart: FC = () => {
 };
 
 export default BarChart;
+
+
 
 
 

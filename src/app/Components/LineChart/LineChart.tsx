@@ -30,7 +30,7 @@ const LineChart: FC<LineChartProps> = ({ darkMode }) => {
         label: 'Title',
         data: [30, 45, 60, 50, 70, 90, 100],
         borderColor: darkMode ? 'rgba(153, 102, 255, 1)' : 'rgba(75, 192, 192, 1)',
-        backgroundColor: darkMode ? 'rgba(153, 102, 255, 0.2)' : 'rgba(75, 192, 192, 0.2)',
+        backgroundColor: darkMode ? 'rgba(153, 102, 255, 1)' : 'rgba(75, 192, 192, 1)',
         borderWidth: 2,
       },
     ],

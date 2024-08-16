@@ -1,0 +1,51 @@
+# BarChart Component Documentation
+
+## Overview
+
+The `BarChart` component is a React functional component that displays a bar chart using the `react-chartjs-2` library and Chart.js. It supports dark mode and provides an option to edit the chart data through a popup.
+
+## Props
+
+- **`darkMode`**: A boolean indicating whether the dark mode is enabled or not.
+
+## Component Structure
+
+1. **State Management**
+
+   - **`title`**: Manages the title of the bar chart.
+   - **`data`**: Manages the data displayed on the bar chart, including labels and datasets.
+   - **`isPopupOpen`**: Manages the visibility of the data editing popup.
+
+2. **Chart Configuration**
+
+   - **`options`**: Configures chart appearance and behavior based on the dark mode setting. Includes options for responsiveness, titles, legends, tooltips, and axis scales.
+
+3. **Event Handlers**
+
+   - **`handlePopupOpen`**: Opens the data editing popup.
+   - **`handlePopupClose`**: Closes the data editing popup.
+
+4. **Render**
+
+   - **Button**: A button to open the data editing popup, styled for dark mode and light mode.
+   - **Chart**: Renders the bar chart with responsive sizing based on screen size.
+   - **Popup**: Conditionally renders the `BarChartPopup` component when `isPopupOpen` is true.
+
+## Example Usage
+
+```tsx
+import { useState } from 'react';
+import BarChart from './BarChart';
+
+const ExampleComponent = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setDarkMode(!darkMode)}>
+        Toggle Dark Mode
+      </button>
+      <BarChart darkMode={darkMode} />
+    </div>
+  );
+};

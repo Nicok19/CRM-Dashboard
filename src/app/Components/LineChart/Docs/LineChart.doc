@@ -1,0 +1,44 @@
+# LineChart Component Documentation
+
+## Overview
+
+The `LineChart` component is a React functional component that renders a line chart using `react-chartjs-2` and `chart.js`. It supports dark mode styling and includes a popup for editing chart data.
+
+## Component Functionality
+
+1. **Chart Configuration**
+
+   - **`title`**: State for the chart's title.
+   - **`data`**: State for the chart data, including labels and dataset.
+   - **`options`**: Configuration for the chart's appearance, including dark mode styling for various chart elements.
+
+2. **Dark Mode Support**
+
+   - Adjusts the chart's colors based on the `darkMode` prop.
+   - Updates text and grid colors for better visibility in dark mode.
+
+3. **Popup for Editing Data**
+
+   - **`isPopupOpen`**: State to control the visibility of the `LineChartPopup` component.
+   - **Button**: Toggles the visibility of the popup for editing chart data.
+
+4. **Rendering**
+
+   - **Button**: A button that triggers the popup for editing chart data.
+   - **Chart**: Renders the line chart with responsive sizing.
+   - **Popup**: Displays the `LineChartPopup` component when `isPopupOpen` is `true`.
+
+## Example Usage
+
+```tsx
+import React from 'react';
+import LineChart from './LineChart';
+
+const ExampleComponent = () => {
+  return (
+    <div>
+      {/* Other components and content */}
+      <LineChart darkMode={false} />
+    </div>
+  );
+};

@@ -1,0 +1,66 @@
+# BarChartPopup Component Documentation
+
+## Overview
+
+The `BarChartPopup` component is a React functional component designed to provide a popup interface for editing the data of a bar chart. This component allows users to modify chart labels and values, and then save the changes. It uses TypeScript and the Chart.js library.
+
+## Props
+
+- **`onClose`**: A function to be called when the popup is closed.
+- **`data`**: The current chart data, of type `ChartData<'bar', number[]>`.
+- **`setData`**: A function to update the chart data, of type `React.Dispatch<React.SetStateAction<ChartData<'bar', number[]>>>`.
+- **`title`**: The current title of the bar chart.
+- **`setTitle`**: A function to update the chart title, of type `React.Dispatch<React.SetStateAction<string>>`.
+
+## Component Structure
+
+1. **State Management**
+
+   - **`inputs`**: Manages the state of label-value pairs used in the bar chart. Initialized with the current chart data or default values if none are provided.
+
+2. **Event Handlers**
+
+   - **`handleAddInput`**: Adds a new label-value pair to the `inputs` array.
+   - **`handleRemoveInput`**: Removes a label-value pair from the `inputs` array, ensuring at least one pair remains.
+   - **`handleInputChange`**: Updates the value of a specific label-value pair based on user input.
+   - **`handleSave`**: Updates the chart data with new labels and values and closes the popup.
+
+3. **Render**
+
+   - **Popup Container**: Displays the popup centered on the screen with a semi-transparent background.
+   - **Form Elements**: Includes input fields for the chart title and label-value pairs, allowing users to add new pairs or remove existing ones.
+   - **Buttons**: Includes buttons for adding pairs, saving changes, and closing the popup.
+
+## Example Usage
+
+```tsx
+import { useState } from 'react';
+import { ChartData } from 'chart.js';
+import BarChartPopup from './BarChartPopup';
+
+const ExampleComponent = () => {
+  const [data, setData] = useState<ChartData<'bar', number[]>>({
+    labels: ['Label 1', 'Label 2'],
+    datasets: [{ label: 'Example Dataset', data: [10, 20] }],
+  });
+  const [title, setTitle] = useState('Example Chart');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleOpenPopup = () => setIsPopupOpen(true);
+  const handleClosePopup = () => setIsPopupOpen(false);
+
+  return (
+    <>
+      <button onClick={handleOpenPopup}>Edit Chart Data</button>
+      {isPopupOpen && (
+        <BarChartPopup
+          onClose={handleClosePopup}
+          data={data}
+          setData={setData}
+          title={title}
+          setTitle={setTitle}
+        />
+      )}
+    </>
+  );
+};

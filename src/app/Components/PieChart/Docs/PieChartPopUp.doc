@@ -1,0 +1,57 @@
+# PieChartPopup Component Documentation
+
+## Overview
+
+The `PieChartPopup` component is a React functional component that provides a form for editing the data of a pie chart. It allows users to modify labels and values, and adjust the chart title. The component supports dynamic updates and form validation.
+
+## Component Functionality
+
+1. **State Management**
+
+   - **`title`**: Stores the title of the pie chart.
+   - **`inputPairs`**: Stores the label-value pairs for the pie chart data.
+
+2. **Effects**
+
+   - **`useEffect`**: Initializes `inputPairs` with existing data when the `data` prop changes.
+
+3. **Event Handlers**
+
+   - **`handleInputChange`**: Updates the label or value for a specific input pair.
+   - **`handleAddInput`**: Adds a new label-value pair to the form.
+   - **`handleRemoveInput`**: Removes a label-value pair from the form.
+   - **`handleSave`**: Validates and saves the updated data, then calls `onClose` to close the popup.
+
+4. **Validation**
+
+   - **`isFormValid`**: Checks if the form has valid data, ensuring that all labels and values are provided and match in count.
+
+## Example Usage
+
+```tsx
+import React, { useState } from 'react';
+import PieChartPopup from './PieChartPopup';
+import { ChartData } from 'chart.js';
+
+const ExampleComponent = () => {
+  const [data, setData] = useState<ChartData<'pie', number[]>>({
+    labels: ['Data 1', 'Data 2'],
+    datasets: [{ label: 'Pie Chart Data', data: [10, 20], backgroundColor: [], borderColor: [], borderWidth: 1 }],
+  });
+  const [showPopup, setShowPopup] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setShowPopup(true)}>Edit Data</button>
+      {showPopup && (
+        <PieChartPopup
+          onClose={() => setShowPopup(false)}
+          data={data}
+          setData={setData}
+        />
+      )}
+    </div>
+  );
+};
+
+export default ExampleComponent;

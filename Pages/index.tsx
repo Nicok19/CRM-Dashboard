@@ -3,6 +3,7 @@ import LineChart from "../src/app/components/LineChart/LineChart";
 import PieChart from "../src/app/components/PieChart/PieChart";
 import BarChart from "../src/app/components/BarChart/BarChart";
 import DownloadPDF from '../src/app/components/DownloadPdf/downoadpdf'; 
+import Logos from 'src/app/components/Tecnologies/tecnologies';
 import Image from 'next/image';
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
   }, [darkMode]);
 
   return (
-    <div className="bg-white dark:bg-slate-800 top-0">
+    <div className="bg-white dark:bg-gradient-to-b dark:from-slate-600 dark:to-slate-800 top-0">
       {/* Header Section */}
       <header className="w-full bg-blue-500 dark:bg-slate-500 md:fixed top-0 left-0 z-50 h-26 md:h-20">
         <div className="flex flex-col md:flex-row justify-between items-center m-auto md:w-2/3 lg:w-5/6 2xl:w-10/12 h-20">
@@ -105,7 +106,10 @@ export default function Home() {
 {/* End of Download PDF Button Section */}
 
 {/* Begining of section Tecnologies */}
+<Logos/>
+<div className=' h-16 w-full bg-blue-500 dark:bg-slate-500'>
 
+</div>
 {/* end of section Tecnologies */}
 
 

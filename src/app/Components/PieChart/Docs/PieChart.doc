@@ -1,0 +1,48 @@
+# PieChart Component Documentation
+
+## Overview
+
+The `PieChart` component is a React functional component that renders a pie chart using the `react-chartjs-2` library. It supports dynamic updates based on a dark mode setting and allows users to edit the chart data via a popup.
+
+## Component Functionality
+
+1. **State Management**
+
+   - **`data`**: Contains the data and configuration for the pie chart, including labels, datasets, and color settings.
+   - **`showPopup`**: Controls the visibility of the `PieChartPopup` component for editing chart data.
+
+2. **Effects**
+
+   - **`useEffect`**: Updates the chart's colors (both background and border) when the `darkMode` state changes.
+
+3. **Event Handlers**
+
+   - **`onClick`**: Toggles the visibility of the `PieChartPopup` component to allow editing of the chart data.
+
+4. **Chart Options**
+
+   - **`options`**: Configures the chart's responsiveness, title, and legend based on the dark mode setting.
+
+## Example Usage
+
+```tsx
+import React, { useState } from 'react';
+import PieChart from './PieChart';
+
+const ExampleComponent = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <div>
+      <button
+        className="bg-gray-800 text-white p-2 rounded"
+        onClick={() => setDarkMode(!darkMode)}
+      >
+        Toggle Dark Mode
+      </button>
+      <PieChart darkMode={darkMode} />
+    </div>
+  );
+};
+
+export default ExampleComponent;

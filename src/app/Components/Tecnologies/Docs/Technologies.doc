@@ -1,0 +1,34 @@
+# Logos Component Documentation
+
+## Overview
+
+The `Logos` component displays a list of technology logos used in a project. It uses the `Image` component from Next.js to handle image optimization and display. The component is styled with Tailwind CSS and supports dark mode.
+
+## Component Functionality
+
+1. **Layout**
+
+   - The component centers its content and provides spacing around and between items.
+   - Displays technology logos in a responsive layout.
+
+2. **Styling**
+
+   - **Heading**: Centers and styles the heading with a blue color in light mode and white in dark mode.
+   - **Logo Containers**: Uses flexbox to align logos vertically and horizontally, with responsive spacing.
+
+3. **Image Handling**
+
+   - **Dark Mode**: Applies different filters and brightness adjustments for images in dark mode.
+
+## Example Usage
+
+```tsx
+import Logos from './Logos';
+
+const ExampleComponent = () => (
+  <div>
+    <Logos />
+  </div>
+);
+
+export default ExampleComponent;

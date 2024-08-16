@@ -1,0 +1,37 @@
+# DownloadPDF Component Documentation
+
+## Overview
+
+The `DownloadPDF` component is a React functional component that generates and downloads a PDF document containing charts from the CRM Dashboard project. It uses `jsPDF` for PDF generation and `html2canvas` for capturing charts as images.
+
+## Component Functionality
+
+1. **Button for Downloading PDF**
+
+   - **`handleDownloadPDF`**: Function that handles the PDF generation and download process.
+
+2. **PDF Generation Process**
+
+   - **Title and Description**: Sets the title and description of the PDF document.
+   - **Hide Buttons**: Temporarily hides buttons with the class `.edit-data-button` to avoid them being included in the PDF.
+   - **Capture Charts**: Uses `html2canvas` to capture images of elements with the class `.chart-container` and adds them to the PDF.
+   - **Restore Button Styles**: Restores the original display styles of the buttons after the PDF generation.
+
+3. **Rendering**
+
+   - **Button**: A button that triggers the PDF download when clicked. Styled for both light and dark modes.
+
+## Example Usage
+
+```tsx
+import React from 'react';
+import DownloadPDF from './DownloadPDF';
+
+const ExampleComponent = () => {
+  return (
+    <div>
+      {/* Other components and content */}
+      <DownloadPDF />
+    </div>
+  );
+};

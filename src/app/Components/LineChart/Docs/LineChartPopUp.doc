@@ -1,0 +1,61 @@
+# LineChartPopup Component Documentation
+
+## Overview
+
+The `LineChartPopup` component is a React functional component used for editing the data of a line chart. It allows users to modify the chart's labels and data values through an interactive form.
+
+## Component Functionality
+
+1. **State Management**
+
+   - **`labels`**: Stores the labels for the chart.
+   - **`chartData`**: Stores the data values for the chart.
+   - **`inputs`**: Array of objects containing label and value pairs for the form inputs.
+
+2. **Effects**
+
+   - **`useEffect`**: Initializes the `inputs` state based on the `labels` and `chartData` props.
+
+3. **Event Handlers**
+
+   - **`handleAddInput`**: Adds a new input pair (label and value) to the form.
+   - **`handleRemoveInput`**: Removes an input pair from the form, with the condition of having at least one input remaining.
+   - **`handleInputChange`**: Updates the label or value of a specific input pair.
+   - **`handleSave`**: Updates the chart data and labels based on the form inputs and closes the popup.
+
+## Example Usage
+
+```tsx
+import React, { useState } from 'react';
+import LineChartPopup from './LineChartPopup';
+import { ChartData } from 'chart.js';
+
+const ExampleComponent = () => {
+  const [data, setData] = useState<ChartData<'line', number[]>>({
+    labels: ['Label 1', 'Label 2'],
+    datasets: [
+      {
+        label: 'Dataset',
+        data: [10, 20],
+        borderColor: 'blue',
+        backgroundColor: 'blue',
+        borderWidth: 2,
+      },
+    ],
+  });
+  const [title, setTitle] = useState('Line Chart');
+
+  const handleClose = () => {
+    // Close the popup logic
+  };
+
+  return (
+    <LineChartPopup
+      onClose={handleClose}
+      data={data}
+      setData={setData}
+      title={title}
+      setTitle={setTitle}
+    />
+  );
+};

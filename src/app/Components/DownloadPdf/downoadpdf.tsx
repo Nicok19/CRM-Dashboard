@@ -13,15 +13,11 @@ const DownloadPDF: React.FC = () => {
 
     // Guardar los estilos originales de los botones
     const originalStyles = Array.from(buttons).map(button => ({
-      backgroundColor: (button as HTMLElement).style.backgroundColor,
-      color: (button as HTMLElement).style.color,
       display: (button as HTMLElement).style.display,
     }));
 
-    // Aplicar estilos para el PDF
+    // Aplicar estilos para ocultar los botones
     buttons.forEach(button => {
-      (button as HTMLElement).style.backgroundColor = 'white';
-      (button as HTMLElement).style.color = 'white';
       (button as HTMLElement).style.display = 'none'; // Ocultar los botones
     });
 
@@ -48,8 +44,6 @@ const DownloadPDF: React.FC = () => {
     // Restaurar los estilos originales de los botones
     buttons.forEach((button, index) => {
       const originalStyle = originalStyles[index];
-      (button as HTMLElement).style.backgroundColor = originalStyle.backgroundColor;
-      (button as HTMLElement).style.color = originalStyle.color;
       (button as HTMLElement).style.display = originalStyle.display;
     });
 
@@ -59,7 +53,7 @@ const DownloadPDF: React.FC = () => {
   return (
     <button
       onClick={handleDownloadPDF}
-      className="w-2/3 md:w-52 2xl:w-52  px-4 py-2 bg-white text-blue-500 hover:bg-blue-200 hover:text-white dark:bg-teal-400 dark:hover:bg-teal-900 dark:hover:text-white dark:text-slate-800 rounded transition-colors duration-300"
+      className="w-2/3 md:w-52 2xl:w-52 px-4 py-2 bg-white text-blue-500 hover:bg-blue-200 hover:text-white dark:bg-teal-400 dark:hover:bg-teal-900 dark:hover:text-white dark:text-slate-800 rounded transition-colors duration-300"
     >
       Download PDF
     </button>
@@ -67,4 +61,3 @@ const DownloadPDF: React.FC = () => {
 };
 
 export default DownloadPDF;
-

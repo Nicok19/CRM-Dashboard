@@ -14,13 +14,17 @@ body {
   text-decoration: none;
   list-style: none;
 }
-/* En tu archivo CSS */
+
 @media print {
   .edit-data-button {
     background-color: white !important;
     color: white !important;
     display: none !important;
   }
+}
+
+.hide-for-pdf {
+  display: none;
 }
 
 

@@ -3,7 +3,7 @@ import LineChart from "../src/app/components/LineChart/LineChart";
 import PieChart from "../src/app/components/PieChart/PieChart";
 import BarChart from "../src/app/components/BarChart/BarChart";
 import DownloadPDF from '../src/app/components/DownloadPdf/downoadpdf'; 
-import Logos from 'src/app/components/Tecnologies/tecnologies';
+import Logos from 'src/app/Components/Tecnologies/Tecnologies';
 import Image from 'next/image';
 
 export default function Home() {

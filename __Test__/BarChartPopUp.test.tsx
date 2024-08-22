@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import BarChartPopup from '../src/app/Components/BarChart/BarChartPopup';
+import BarChartPopup from '../src/app/components/BarChart/BarChartPopup';
 import { ChartData } from 'chart.js';
 
 describe('BarChartPopup Component', () => {

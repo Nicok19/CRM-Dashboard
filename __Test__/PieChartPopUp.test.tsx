@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import PieChartPopup from '../src/app/components/PieChart/PieChartPopup';
+import PieChartPopup from '../src/app/Components/PieChart/PieChartPopup';
 import { ChartData } from 'chart.js';
 
 describe('PieChartPopup', () => {

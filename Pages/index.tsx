@@ -3,7 +3,7 @@ import LineChart from "../src/app/Components/LineChart/LineChart";
 import PieChart from "../src/app/Components/PieChart/PieChart";
 import BarChart from "../src/app/Components/BarChart/BarChart";
 import DownloadPDF from '../src/app/Components/DownloadPdf/downoadpdf'; 
-import Logos from 'src/app/Components/Tecnologies/Tecnologies';
+import Logos from '../src/app/Components/Tecnologies/Tecnologies';
 import Image from 'next/image';
 
 export default function Home() {
@@ -43,17 +43,13 @@ export default function Home() {
       CRM Dashboard
     </h1>
     <h2 className="text-center text-sm md:text-xl xl:text-xl font-regular text-white mt-6 w-2/3 pb-16">
-      Here’s a basic example of using charts. This small project was created with Next.js, utilizing Chart.js for building the charts and Tailwind for styling.
+    Select any of the charts and define the data and labels you want to modify by clicking the edit data button.
     </h2>
   </section>
 </div>
 {/* End of Content Section */}
 
-
-
-      
       {/* End of Header Section */}
-
      
         {/* PieChart Section */}
         <section className="mt-10 sm:mt-16 md:mt-24 lg:mt-32 xl:mt-20 flex justify-center items-center w-full">
@@ -74,8 +70,6 @@ export default function Home() {
           </div>
         </section>
         {/* End of LineChart and BarChart Section */}
-        
-    
       {/* End of Content Section */}
       
  {/* Download PDF Button Section */}
@@ -111,8 +105,6 @@ export default function Home() {
 
 </div>
 {/* end of section Tecnologies */}
-
-
     </div>
   );
 }

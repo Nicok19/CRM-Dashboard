@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import LineChart from "../src/app/Components/LineChart/LineChart";
-import PieChart from "../src/app/Components/PieChart/PieChart";
-import BarChart from "../src/app/Components/BarChart/BarChart";
-import DownloadPDF from '../src/app/Components/DownloadPdf/downoadpdf'; 
-import Logos from '../src/app/Components/Tecnologies/Tecnologies';
+import LineChart from "../src/app/components/LineChart/LineChart";
+import PieChart from "../src/app/components/PieChart/PieChart";
+import BarChart from "../src/app/components/BarChart/BarChart";
+import DownloadPDF from '../src/app/components/DownloadPdf/downoadpdf'; 
+import Logos from '../src/app/components/Tecnologies/Tecnologies';
 import Image from 'next/image';
 
 export default function Home() {

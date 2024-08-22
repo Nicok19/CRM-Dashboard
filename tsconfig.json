@@ -22,7 +22,7 @@
         "src/app/Components/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "pages/*"  
       ]
     },
     "types": [

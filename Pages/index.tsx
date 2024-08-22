@@ -5,7 +5,6 @@ import BarChart from "../src/app/Components/BarChart/BarChart";
 import DownloadPDF from '../src/app/Components/DownloadPdf/downoadpdf'; 
 import Logos from '../src/app/Components/Logos/Logos';
 import Image from 'next/image';
-
 export default function Home() {
   // State and Effect for Dark Mode
   const [darkMode, setDarkMode] = useState(false);

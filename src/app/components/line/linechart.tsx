@@ -13,7 +13,7 @@ import {
   ChartOptions,
   TooltipItem,
 } from 'chart.js';
-import LineChartPopup from './LineChartPopup';
+import LineChartPopup from './linechartPopup';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 

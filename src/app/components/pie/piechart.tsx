@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { ChartData, ChartOptions, ArcElement, Title, Legend } from 'chart.js';
-import PieChartPopup from './PieChartPopup';
+import PieChartPopup from './piechartPopup';
 import { Chart } from 'chart.js';
 
 // Register necessary elements

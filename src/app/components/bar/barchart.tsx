@@ -12,7 +12,7 @@ import {
   ChartOptions,
   TooltipItem,
 } from 'chart.js';
-import BarChartPopup from './BarChartPopup';
+import BarChartPopup from './barchartPopup';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 

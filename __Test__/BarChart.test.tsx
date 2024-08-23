@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import BarChart from '../src/app/Components/BarChart/BarChart';
+import BarChart from '../src/app/components/barchart/barchart';
 
 describe('BarChart Component', () => {
   it('renders the BarChart component correctly', () => {

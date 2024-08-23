@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import LineChart from "../src/app/Components/LineChart/LineChart";
-import PieChart from "../src/app/Components/PieChart/PieChart";
-import BarChart from "../src/app/Components/BarChart/BarChart";
-import DownloadPDF from '../src/app/Components/DownloadPdf/downoadpdf'; 
-import Logos from '../src/app/Components/Logos/Logos';
+import LineChart from "../src/app/components/linechart/linechart";
+import PieChart from "../src/app/components/piechart/piechart";
+import BarChart from "../src/app/components/barchart/barchart";
+import DownloadPDF from '../src/app/components/downloadPdf/downoadpdf'; 
+import Logos from '../src/app/components/logos/logos';
 import Image from 'next/image';
-
 export default function Home() {
   // State and Effect for Dark Mode
   const [darkMode, setDarkMode] = useState(false);

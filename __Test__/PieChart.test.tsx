@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import PieChart from '../src/app/Components/PieChart/PieChart';
+import PieChart from '../src/app/components/piechart/piechart';
 
 jest.mock('react-chartjs-2', () => ({
   Pie: () => <div>Mocked Pie Chart</div>, // Mock del componente Pie para evitar renderizarlo completamente

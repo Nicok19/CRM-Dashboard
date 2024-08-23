@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Logos from '../src/app/components/logos/logos';
+import Logos from '../src/app/components/tecnologies/logos';
 
 describe('Logos Component', () => {
   test('renders the title', () => {

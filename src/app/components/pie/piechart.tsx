@@ -25,6 +25,8 @@ const PieChart: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
     ],
   });
 
+  
+
   const [showPopup, setShowPopup] = useState(false);
 
   // Update chart options based on dark mode

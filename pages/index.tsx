@@ -1,3 +1,4 @@
+// Dependencies
 import { useState, useEffect } from 'react';
 import LineChart from "@components/line/linechart";
 import PieChart from "@components/pie/piechart";
@@ -5,6 +6,7 @@ import BarChart from "@components/bar/barchart";
 import DownloadPDF from '@components/pdf/downoadpdf'; 
 import Logos from '@components/tecnologies/logos';
 import Image from 'next/image';
+
 
 export default function Home() {
   // State and Effect for Dark Mode
